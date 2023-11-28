@@ -1,0 +1,40 @@
+---
+- hosts: docker_servers
+  gather_facts: no
+  become: true
+  vars:
+    default_container_name: go_app
+    default_service_path: /etc/systemd/system/docker-containers
+  # проверка существования папки
+  tasks:
+  - name: Ansible check directory.
+    stat:
+     path: "{default_service_path}"
+    register: docker-containers
+  # создаем папку, если ее нет
+  - name: "Ansible Create directory if not exists"
+    file:
+     path: "{default_service_path}"
+     state: directory
+     mode: 0755
+     group: root
+     owner: root
+    when: docker-containers.stat.exists == false
+  # copy unit-file
+  - name: Copy from Local to Remote Target Machine with 'copy'
+    copy:
+      src: app.service
+      dest: "{default_service_path}"
+      backup: yes
+  # reload daemon-reload and start service go_app
+  - name: Start service with systemd
+    ansible.builtin.systemd_service:
+      state: started
+      daemon_reload: true
+      name: app.service
+  # enable service go_app
+  - name: Enable nginx service
+    systemd:
+      name: app.service
+      enabled: true
+      masked: no
