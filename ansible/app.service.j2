@@ -1,0 +1,11 @@
+[Unit]
+Description=Docker Container for GoApp
+After=docker.service
+Requires=docker.service
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=/usr/bin/docker run -d -p {{ host_port }}:{{ container_port }} --name {{ container_name }} {{ container_image }}
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
