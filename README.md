@@ -28,25 +28,7 @@
    ./app
    ```
 
-## Как работать с приложением в docker:  
-1. Установить docker
-2. Запустить тесты
-   ```shell
-   ./run-tests.sh
-   ```
-3. Собрать:
-   ```shell
-   docker-compose build
-   ```
-   or
-   ```shell
-   docker build . -t skillbox/app
-   ```
-4. Запустить:
-   ```shell
-   docker-compose up
-   ```
-   or
-   ```shell
-   docker run -p8080:8080 skillbox/app
-   ```
+## Как работать с приложением в docker:
+```
+1. Установить значения констант container_name, container_image, host_port и container_port для запускаемого сервиса. Значения констант должны быть понятны из их названия.
+2. Перейти в папку ansible и запустить плейбук install_service.yml, который создаст и запустит контейнер с определенными на шаге 1 настройками.```
