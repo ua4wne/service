@@ -1,5 +1,8 @@
 # skillbox-diploma
-Чтобы скопировать репозиторий к себе для работы, вам нужно следовать [этим инструкциям](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/duplicating-a-repository#mirroring-a-repository-in-another-location).
+
+## Как развернуть приложение на сервере в облаке:
+1. Установить значения констант container_name, container_image, host_port и container_port для запускаемого сервиса. Значения констант должны быть понятны из их названия.
+2. Перейти в папку ansible и запустить плейбук install_service.yml, который создаст и запустит контейнер с определенными на шаге 1 настройками.
 
 ## Runtime
 Приложение отвечает по 3 эндпоинтам:  
@@ -27,7 +30,3 @@
    ```shell
    ./app
    ```
-
-## Как работать с приложением в docker:
-1. Установить значения констант container_name, container_image, host_port и container_port для запускаемого сервиса. Значения констант должны быть понятны из их названия.
-2. Перейти в папку ansible и запустить плейбук install_service.yml, который создаст и запустит контейнер с определенными на шаге 1 настройками.
